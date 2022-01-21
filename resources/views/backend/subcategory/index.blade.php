@@ -28,10 +28,10 @@
     <div class="col-lg-12 grid-margin stretch-card">
         <div class="card">
         <div class="card-body">
-            <h4 class="card-title">Category Page</h4>
+            <h4 class="card-title">Sub Category Page</h4>
 
         <div class="template-demo">
-            <a href="{{ route('add.category') }}"><button type="button" class="btn btn-primary btn-fw" style="float: right;">Add Category</button></a>
+            <a href="{{ route('add.subcategory') }}"><button type="button" class="btn btn-primary btn-fw" style="float: right;">Add SubCategory</button></a>
         </div>
 
             <div class="table-responsive">
@@ -39,27 +39,29 @@
                 <thead>
                 <tr>
                     <th> # </th>
-                    <th> Category English </th>
-                    <th> Category Japanes </th>
+                    <th> SubCategory English </th>
+                    <th> SubCategory Japanese </th>
+                    <th> Category Name </th>
                     <th> Action </th>
                 </tr>
                 </thead>
                 <tbody>
                     @php($i = 1)
-                    @foreach ($category as $row)
+                    @foreach ($subcategory as $row)
                     <tr>
                         <td> {{ $i++ }} </td>
+                        <td> {{ $row->subcategory_en }} </td>
+                        <td> {{ $row->subcategory_jp }} </td>
                         <td> {{ $row->category_en }} </td>
-                        <td> {{ $row->category_jp }} </td>
                         <td>
-                            <a href="{{ route('edit.category',$row->id) }}" class="btn btn-info">Edit</a>
-                            <a href="{{ route('delete.category',$row->id) }}" onclick="return confirm('Are You Sure ?')" class="btn btn-danger">Delete</a>
+                            <a href="{{ route('edit.subcategory',$row->id) }}" class="btn btn-info">Edit</a>
+                            <a href="{{ route('delete.subcategory',$row->id) }}" onclick="return confirm('Are You Sure ?')" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach
                 </tbody>
             </table>
-            {{ $category->links('pagination-links') }}
+            {{ $subcategory->links('pagination-links') }}
             </div>
         </div>
         </div>
