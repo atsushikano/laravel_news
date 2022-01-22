@@ -2,7 +2,9 @@
 
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
+use App\Http\Controllers\backend\DistrictController;
 use App\Http\Controllers\Backend\SubCategoryController;
+use App\Http\Controllers\backend\SubDistrictController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -43,3 +45,19 @@ Route::post('/store/subcategory', [SubCategoryController::class, 'StoreSubCatego
 Route::get('/edit/subcategory/{id}', [SubCategoryController::class, 'EditSubCategory'])->name('edit.subcategory');
 Route::post('/update/subcategory/{id}', [SubCategoryController::class, 'UpdateSubCategory'])->name('update.subcategory');
 Route::get('/delete/subcategory/{id}', [SubCategoryController::class, 'DeleteSubCategory'])->name('delete.subcategory');
+
+// Admin SubCategories All Route
+Route::get('/districts', [DistrictController::class, 'Index'])->name('districts');
+Route::get('/add/district', [DistrictController::class, 'AddDistrict'])->name('add.district');
+Route::post('/store/district', [DistrictController::class, 'StoreDistrict'])->name('store.district');
+Route::get('/edit/district/{id}', [DistrictController::class, 'EditDistrict'])->name('edit.district');
+Route::post('/update/district/{id}', [DistrictController::class, 'UpdateDistrict'])->name('update.district');
+Route::get('/delete/district/{id}', [DistrictController::class, 'DeleteDistrict'])->name('delete.district');
+
+// Admin SubCategories All Route
+Route::get('/subdistricts', [SubDistrictController::class, 'Index'])->name('subdistricts');
+// Route::get('/add/subdistrict', [SubDistrictController::class, 'AddSubSubDistrict'])->name('add.subdistrict');
+// Route::post('/store/subdistrict', [SubDistrictController::class, 'StoreSubDistrict'])->name('store.subdistrict');
+// Route::get('/edit/subdistrict/{id}', [SubDistrictController::class, 'EditSubDistrict'])->name('edit.subdistrict');
+// Route::post('/update/subdistrict/{id}', [SubDistrictController::class, 'UpdateSubDistrict'])->name('update.subdistrict');
+// Route::get('/delete/subdistrict/{id}', [SubDistrictController::class, 'DeleteSubDistrict'])->name('delete.subdistrict');
