@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\backend\DistrictController;
+use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubDistrictController;
 use Illuminate\Support\Facades\Route;
@@ -61,3 +62,14 @@ Route::post('/store/subdistrict', [SubDistrictController::class, 'StoreSubDistri
 Route::get('/edit/subdistrict/{id}', [SubDistrictController::class, 'EditSubDistrict'])->name('edit.subdistrict');
 Route::post('/update/subdistrict/{id}', [SubDistrictController::class, 'UpdateSubDistrict'])->name('update.subdistrict');
 Route::get('/delete/subdistrict/{id}', [SubDistrictController::class, 'DeleteSubDistrict'])->name('delete.subdistrict');
+
+// Json Data for Category and District
+Route::get('/get/subcategory/{category_id}', [PostController::class, 'GetSubCategory']);
+Route::get('/get/subdistrict/{district_id}', [PostController::class, 'GetSubDistrict']);
+Route::post('/store/post', [PostController::class, 'StorePost'])->name('store.post');
+
+
+
+
+Route::get('/createpost', [PostController::class, 'Create'])->name('create.post');
+Route::get('/allpost', [PostController::class, 'index'])->name('all.post');
