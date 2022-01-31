@@ -58,8 +58,8 @@
                         <td> <img src="{{ $row->image }}" style="width: 50px; height:50px";> </td>
                         <td> {{ Carbon\Carbon::parse($row->post_date)->diffforHumans() }} </td>
                         <td>
-                            <a href="{{ route('edit.category',$row->id) }}" class="btn btn-info">Edit</a>
-                            <a href="{{ route('delete.category',$row->id) }}" onclick="return confirm('Are You Sure ?')" class="btn btn-danger">Delete</a>
+                            <a href="{{ route('edit.post',$row->id) }}" class="btn btn-info">Edit</a>
+                            <a href="{{ route('delete.post',$row->id) }}" onclick="return confirm('Are You Sure ?')" class="btn btn-danger">Delete</a>
                         </td>
                     </tr>
                     @endforeach

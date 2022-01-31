@@ -19,13 +19,7 @@ class PostController extends Controller
             ->join('subcategories', 'posts.subcategory_id', 'subcategories.id')
             ->join('districts', 'posts.district_id', 'districts.id')
             ->join('subdistricts', 'posts.subdistrict_id', 'subdistricts.id')
-            ->select(
-                'posts.*',
-                'categories.category_en',
-                'subcategories.subcategory_en',
-                'districts.district_en',
-                'subdistricts.subdistrict_en'
-            )
+            ->select('posts.*', 'categories.category_en', 'subcategories.subcategory_en', 'districts.district_en', 'subdistricts.subdistrict_en')
             ->orderBy('id', 'desc')->paginate(5);
         return view('backend.post.index', compact('post'));
     }
@@ -92,6 +86,77 @@ class PostController extends Controller
         } else {
             return Redirect()->back();
         } // End Condition
-
     } // End Methot
+
+    public function EditPost($id)
+    {
+        $post = DB::table('posts')->where('id', $id)->first();
+        $category = DB::table('categories')->get();
+        $district = DB::table('districts')->get();
+        return view('backend.post.edit', compact('post', 'category', 'district'));
+    }
+
+    public function UpdatePost(Request $request, $id)
+    {
+        $data = array();
+        $data['user_id'] = Auth::id();
+        $data['title_en'] = $request->title_en;
+        $data['title_jp'] = $request->title_jp;
+        $data['category_id'] = $request->category_id;
+        $data['subcategory_id'] = $request->subcategory_id;
+        $data['district_id'] = $request->district_id;
+        $data['subdistrict_id'] = $request->subdistrict_id;
+        $data['tags_en'] = $request->tags_en;
+        $data['tags_jp'] = $request->tags_jp;
+        $data['details_en'] = $request->details_en;
+        $data['details_jp'] = $request->details_jp;
+        $data['headline'] = $request->headline;
+        $data['first_section'] = $request->first_section;
+        $data['first_section_thumbnail'] = $request->first_section_thumbnail;
+        $data['bigthumbnail'] = $request->bigthumbnail;
+        $data['post_date'] = date('d-m-Y');
+        $data['post_month'] = date("F");
+
+        $oldiamge = $request->oldimage;
+        $image = $request->image;
+        if ($image) {
+            $image_one = uniqid() . '.' . $image->getClientOriginalExtension();
+            Image::make($image)->resize(500, 300)->save('image/postimg/' . $image_one);
+            $data['image'] = 'image/postimg/' . $image_one;
+            DB::table('posts')->where('id', $id)->update($data);
+            unlink($oldiamge);
+
+            $notification = array(
+                'message' => 'Post Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return Redirect()->route('all.post')->with($notification);
+        } else {
+            $data['image'] = $oldiamge;
+            DB::table('posts')->where('id', $id)->update($data);
+
+            $notification = array(
+                'message' => 'Post Updated Successfully',
+                'alert-type' => 'success'
+            );
+
+            return Redirect()->route('all.post')->with($notification);
+        } // End Condition
+    } // End Methot
+
+    public function DeletePost($id)
+    {
+        $post = DB::table('posts')->where('id', $id)->first();
+        unlink($post->image);
+
+        DB::table('posts')->where('id', $id)->delete();
+
+        $notification = array(
+            'message' => 'Post Deleted Successfully',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->route('all.post')->with($notification);
+    }
 }
