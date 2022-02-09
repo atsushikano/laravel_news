@@ -64,51 +64,91 @@
           <span class="menu-title">Dashborad</span>
         </a>
       </li>
+
       <li class="nav-item menu-items">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" data-toggle="collapse" href="#category" aria-expanded="false" aria-controls="category">
           <span class="menu-icon">
             <i class="mdi mdi-laptop"></i>
           </span>
           <span class="menu-title">Categorys</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="category">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{ route('categories') }}">Category</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{ route('subcategories') }}">SubCategory</a></li>
           </ul>
         </div>
       </li>
+
       <li class="nav-item menu-items">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" data-toggle="collapse" href="#district" aria-expanded="false" aria-controls="district">
           <span class="menu-icon">
             <i class="mdi mdi-security"></i>
           </span>
           <span class="menu-title">District</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="district">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{ route('districts') }}">District</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{ route('subdistricts') }}">SubDistrict</a></li>
           </ul>
         </div>
       </li>
+
       <li class="nav-item menu-items">
-        <a class="nav-link" data-toggle="collapse" href="#ui-basic" aria-expanded="false" aria-controls="ui-basic">
+        <a class="nav-link" data-toggle="collapse" href="#post" aria-expanded="false" aria-controls="post">
           <span class="menu-icon">
             <i class="mdi mdi-security"></i>
           </span>
           <span class="menu-title">Posts</span>
           <i class="menu-arrow"></i>
         </a>
-        <div class="collapse" id="ui-basic">
+        <div class="collapse" id="post">
           <ul class="nav flex-column sub-menu">
             <li class="nav-item"> <a class="nav-link" href="{{ route('create.post') }}">Add Post</a></li>
             <li class="nav-item"> <a class="nav-link" href="{{ route('all.post') }}">All Post</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('social.setting') }}">Social Setting</a></li>
           </ul>
         </div>
       </li>
+
+      <li class="nav-item menu-items">
+        <a class="nav-link" data-toggle="collapse" href="#setting" aria-expanded="false" aria-controls="setting">
+          <span class="menu-icon">
+            <i class="mdi mdi-security"></i>
+          </span>
+          <span class="menu-title">Setting</span>
+          <i class="menu-arrow"></i>
+        </a>
+        <div class="collapse" id="setting">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{ route('social.setting') }}">Social Setting</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('seo.setting') }}">Seo Setting</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('livetv.setting') }}">Live Tv Setting</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('notice.setting') }}">Notice Setting</a></li>
+          </ul>
+        </div>
+      </li>
+
+      <li class="nav-item menu-items">
+
+        <a class="nav-link" data-toggle="collapse" href="#website" aria-expanded="false" aria-controls="website">
+            <span class="menu-icon">
+              <i class="mdi mdi-security"></i>
+            </span>
+            <span class="menu-title">Website</span>
+            <i class="menu-arrow"></i>
+          </a>
+          <div class="collapse" id="website">
+          <ul class="nav flex-column sub-menu">
+            <li class="nav-item"> <a class="nav-link" href="{{ route('add.website') }}">Add Website Link</a></li>
+            <li class="nav-item"> <a class="nav-link" href="{{ route('all.website') }}">All Website Link</a></li>
+          </ul>
+        </div>
+      </li>
+
       <li class="nav-item menu-items">
         <a class="nav-link" href="pages/forms/basic_elements.html">
           <span class="menu-icon">
