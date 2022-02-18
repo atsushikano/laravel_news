@@ -140,7 +140,7 @@ class GalleryController extends Controller
         DB::table('videos')->where('id', $id)->update($data);
 
         $notification = array(
-            'message' => 'Photo Inserted Successfully',
+            'message' => 'Photo Updated Successfully',
             'alert-type' => 'info'
         );
 
