@@ -3,6 +3,7 @@
 use App\Http\Controllers\AdminController;
 use App\Http\Controllers\Backend\CategoryController;
 use App\Http\Controllers\backend\DistrictController;
+use App\Http\Controllers\Backend\GalleryController;
 use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubDistrictController;
@@ -101,3 +102,19 @@ Route::post('/store/website', [SettingController::class, 'StoreWebsite'])->name(
 Route::get('/edit/website/{id}', [SettingController::class, 'EditWebsite'])->name('edit.website');
 Route::post('/update/website/{id}', [SettingController::class, 'UpdateWebsite'])->name('update.website');
 Route::get('/delete/website/{id}', [SettingController::class, 'DeleteWebsite'])->name('delete.website');
+
+// Photo Gallery All Route
+Route::get('/photo/gallery', [GalleryController::class, 'PhotoGallery'])->name('photo.gallery');
+Route::get('/add/photo', [GalleryController::class, 'AddPhoto'])->name('add.photo');
+Route::post('/store/photo', [GalleryController::class, 'StorePhoto'])->name('store.photo');
+Route::get('/edit/photo/{id}', [GalleryController::class, 'EditPhoto'])->name('edit.photo');
+Route::post('/update/photo/{id}', [GalleryController::class, 'UpdatePhoto'])->name('update.photo');
+Route::get('/delete/photo/{id}', [GalleryController::class, 'DeletePhoto'])->name('delete.photo');
+
+// Video Gallery All Route
+Route::get('/video/gallery', [GalleryController::class, 'VideoGallery'])->name('video.gallery');
+Route::get('/add/video', [GalleryController::class, 'AddVideo'])->name('add.video');
+Route::post('/store/video', [GalleryController::class, 'StoreVideo'])->name('store.video');
+Route::get('/edit/video/{id}', [GalleryController::class, 'EditVideo'])->name('edit.video');
+Route::post('/update/video/{id}', [GalleryController::class, 'UpdateVideo'])->name('update.video');
+Route::get('/delete/video/{id}', [GalleryController::class, 'DeleteVideo'])->name('delete.video');
