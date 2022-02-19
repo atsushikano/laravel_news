@@ -88,12 +88,15 @@ class GalleryController extends Controller
 
     public function DeletePhoto($id)
     {
-        DB::table('photos')->where('id', $id)->delete();
+        $photo = DB::table('photos')->where('id', $id)->first();
+        unlink($photo->photo);
 
         $notification = array(
             'message' => 'Photo Deleted Successfully',
             'alert-type' => 'success'
         );
+
+        DB::table('photos')->where('id', $id)->delete();
 
         return Redirect()->route('photo.gallery')->with($notification);
     }
