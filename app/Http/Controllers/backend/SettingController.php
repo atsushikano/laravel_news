@@ -82,6 +82,29 @@ class SettingController extends Controller
         return Redirect()->route('livetv.setting')->with($notification);
     }
 
+    public function ActiveLivetvSetting(Request $request, $id)
+    {
+        DB::table('livetvs')->where('id', $id)->update(['status' => 1]);
+
+        $notification = array(
+            'message' => 'Livetv Active Successfully',
+            'alert-type' => 'success'
+        );
+
+        return Redirect()->back()->with($notification);
+    }
+
+    public function DeActiveLivetvSetting(Request $request, $id)
+    {
+        DB::table('livetvs')->where('id', $id)->update(['status' => 0]);
+
+        $notification = array(
+            'message' => 'Livetv Setting Updated Successfully',
+            'alert-type' => 'success'
+        );
+        return Redirect()->back()->with($notification);
+    }
+
     public function NoticeSetting()
     {
         $notice = DB::table('notices')->first();
@@ -91,7 +114,8 @@ class SettingController extends Controller
     public function NoticeUpdate(Request $request, $id)
     {
         $data = array();
-        $data['notice'] = $request->notice;
+        $data['notice_en'] = $request->notice_en;
+        $data['notice_jp'] = $request->notice_jp;
         $data['status'] = $request->status;
         DB::table('notices')->where('id', $id)->update($data);
 

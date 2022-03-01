@@ -8,7 +8,10 @@ use App\Http\Controllers\Backend\PostController;
 use App\Http\Controllers\Backend\SubCategoryController;
 use App\Http\Controllers\backend\SubDistrictController;
 use App\Http\Controllers\backend\SettingController;
+use App\Http\Controllers\Frontend\ExtraController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Frontend\ExtraControllerr;
+
 
 /*
 |--------------------------------------------------------------------------
@@ -88,6 +91,8 @@ Route::post('/seo/update/{id}', [SettingController::class, 'SeoUpdate'])->name('
 // Livetv Setting All Route
 Route::get('/livetv/setting', [SettingController::class, 'LivetvSetting'])->name('livetv.setting');
 Route::post('/livetv/update/{id}', [SettingController::class, 'LivetvUpdate'])->name('update.livetv');
+Route::get('/livetv/active/{id}', [SettingController::class, 'ActiveLivetvSetting'])->name('active.livetv');
+Route::get('/livetv/deactive/{id}', [SettingController::class, 'DeActiveLivetvSetting'])->name('deactive.livetv');
 
 // Notice Setting All Route
 Route::get('/notice/setting', [SettingController::class, 'NoticeSetting'])->name('notice.setting');
@@ -118,3 +123,8 @@ Route::post('/store/video', [GalleryController::class, 'StoreVideo'])->name('sto
 Route::get('/edit/video/{id}', [GalleryController::class, 'EditVideo'])->name('edit.video');
 Route::post('/update/video/{id}', [GalleryController::class, 'UpdateVideo'])->name('update.video');
 Route::get('/delete/video/{id}', [GalleryController::class, 'DeleteVideo'])->name('delete.video');
+
+// Frontend
+// Multi Language Routes
+Route::get('/lang/japanese', [ExtraController::class, 'Japanese'])->name('lang.japanese');
+Route::get('/lang/english', [ExtraController::class, 'English'])->name('lang.english');

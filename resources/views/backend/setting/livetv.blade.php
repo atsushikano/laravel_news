@@ -31,6 +31,21 @@
             <div class="card-body">
                 <h4 class="card-title">Live Tv Setting</h4>
 
+                <div>
+                    @if ($livetv->status == 1)
+                        <a href="{{ route('deactive.livetv',$livetv->id) }}">
+                        <button class="btn btn-danger btn-fw">DeActive</button></a>
+                    @else
+                        <a href="{{ route('active.livetv',$livetv->id) }}">
+                         <button class="btn btn-primary btn-fw">Active</button></a>
+                    @endif
+                </div>
+                    @if ($livetv->status == 1)
+                        <small class="text-success">Now Livetv Are Active</small>
+                    @else
+                        <small class="text-danger">Now Livetv Are DeActive</small>
+                    @endif
+
                 <form class="forms-sample" method="POST" action="{{ route('update.livetv',$livetv->id) }}">
                     @csrf
 

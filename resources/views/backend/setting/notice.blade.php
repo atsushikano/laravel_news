@@ -49,9 +49,16 @@
                     @csrf
 
                     <div class="form-group">
-                        <label for="exampleTextarea1">Notice Code For Setting</label>
-                        <textarea class="form-control" name="notice" id="summernote">
-                            {{ $notice->notice }}
+                        <label for="exampleTextarea1">Notice Code For Setting Englich</label>
+                        <textarea class="form-control" name="notice_en" id="summernote">
+                            {{ $notice->notice_en }}
+                        </textarea>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="exampleTextarea1">Notice Code For Setting Japanese</label>
+                        <textarea class="form-control" name="notice_jp" id="summernote1">
+                            {{ $notice->notice_jp }}
                         </textarea>
                     </div>
 

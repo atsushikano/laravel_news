@@ -1,4 +1,9 @@
-    <!-- header-start -->
+@php
+    $category = DB::table('categories')->orderBy('id','ASC')->get();
+    $social = DB::table('socials')->first();
+@endphp
+
+<!-- header-start -->
 	<section class="hdr_section">
 		<div class="container-fluid">
 			<div class="row">
@@ -11,7 +16,7 @@
 					<div id="menu-area" class="menu_area">
 						<div class="menu_bottom">
 							<nav role="navigation" class="navbar navbar-default mainmenu">
-						<!-- Brand and toggle get grouped for better mobile display -->
+						        <!-- Brand and toggle get grouped for better mobile display -->
 								<div class="navbar-header">
 									<button type="button" data-target="#navbarCollapse" data-toggle="collapse" class="navbar-toggle">
 										<span class="sr-only">Toggle navigation</span>
@@ -24,29 +29,32 @@
 								<div id="navbarCollapse" class="collapse navbar-collapse">
 									<ul class="nav navbar-nav">
 										<li><a href="#">HOME</a></li>
-										<li><a href="#">BUSINESS</a></li>
-											<li class="dropdown">
-												<a href="#" class="dropdown-toggle" data-toggle="dropdown">WORLD <b class="caret"></b></a>
+                                        @foreach ($category as $row)
+                                        @php
+                                            $subcategory = DB::table('subcategories')->where('category_id', $row->id)->get();
+                                        @endphp
+                                        <li class="dropdown">
+                                            <a href="#" class="dropdown-toggle" data-toggle="dropdown">
+                                                @if (session()->get('lang')=='japanese')
+                                                    {{ $row->category_jp }}
+                                                @else
+                                                    {{ $row->category_en }}
+                                                @endif
+                                            <b class="caret"></b></a>
 											<ul class="dropdown-menu">
-												<li><a href="#">USA</a></li>
-												<li><a href="#">UK</a></li>
+                                                @foreach ($subcategory as $row)
+                                                    <li><a href="#">
+                                                        @if (session()->get('lang')=='english')
+                                                            {{ $row->subcategory_en }}
+                                                        @else
+                                                            {{ $row->subcategory_jp }}
+                                                        @endif
+                                                    </a></li>
+                                                @endforeach
 											</ul>
-											</li>
-
-										<li class="dropdown">
-											<a href="#" class="dropdown-toggle" data-toggle="dropdown">FASHION<b class="caret"></b></a>
-											<ul class="dropdown-menu">
-												<li><a href="#">Mans FASHION</a></li>
-												<li><a href="#">Woman FASHION</a></li>
-											</ul>
-										</li>
-										<li><a href="#">POLITICS </a></li>
-										<li><a href="#">SPORTS</a></li>
-
-
-										<li><a href="#" target="_blank">HEALTH</a></li>
-										<li><a href="#" target="_blank">VIDEOS</a></li>
-
+                                        </li>
+                                        @endforeach
+                                    </ul>
 								</div>
 							</nav>
 						</div>
@@ -56,7 +64,13 @@
 					<div class="header-icon">
 						<ul>
 							<!-- version-start -->
-							<li class="version"><a href="#"><B>HINDI</B></a></li>&nbsp;&nbsp;&nbsp;
+
+                            @if (session()->get('lang') == 'japanese')
+                                <li class="version"><a href="{{ route('lang.english') }}">English</a></li>
+                            @else
+                                <li class="version"><a href="{{ route('lang.japanese') }}">日本語</a></li>
+                            @endif
+							{{-- <li class="version"><a href="#"><B>English</B></a></li>&nbsp;&nbsp;&nbsp; --}}
 							<!-- login-start -->
 
 							<!-- search-start -->
@@ -93,10 +107,10 @@
 								<div class="dropdown">
 								  <button class="dropbtn-02"><i class="fa fa-thumbs-up" aria-hidden="true"></i></button>
 								  <div class="dropdown-content">
-									<a href="#"><i class="fa fa-facebook" aria-hidden="true"></i> Facebook</a>
-									<a href="#"><i class="fa fa-twitter" aria-hidden="true"></i> Twitter</a>
-									<a href="#"><i class="fa fa-youtube-play" aria-hidden="true"></i> Youtube</a>
-									<a href="#"><i class="fa fa-instagram" aria-hidden="true"></i> Instagram</a>
+									<a href="{{ $social->facebook }}"><i class="fa fa-facebook" aria-hidden="true"></i>facebook</a>
+									<a href="{{ $social->twitter }}"><i class="fa fa-twitter" aria-hidden="true"></i>twitter</a>
+									<a href="{{ $social->youtube }}"><i class="fa fa-youtube-play" aria-hidden="true"></i>youtube</a>
+									<a href="{{ $social->instagram }}"><i class="fa fa-instagram" aria-hidden="true"></i>instagram</a>
 								  </div>
 								</div>
 							</li>
@@ -136,16 +150,57 @@
     </section><!-- /.date-close -->
 
 	<!-- notice-start -->
-
+@php
+    $headline = DB::table('posts')->where('posts.headline' , 1)->limit(3)->get();
+    $notice = DB::table('notices')->first();
+@endphp
     <section>
     	<div class="container-fluid">
 			<div class="row scroll">
 				<div class="col-md-2 col-sm-3 scroll_01 ">
-					Breaking News :
+                    @if (session()->get('lang')== 'english')
+                        Breaking News :
+                    @else
+                        ニュース速報 :
+                    @endif
 				</div>
 				<div class="col-md-10 col-sm-9 scroll_02">
-					<marquee>wellcome to our website...</marquee>
+					<marquee>
+                        @foreach ($headline as $row)
+                            @if (session()->get('lang')== 'english')
+                                {{ $row->title_en }}
+                            @else
+                                {{ $row->title_jp }}
+                            @endif
+                        @endforeach
+                    </marquee>
 				</div>
 			</div>
     	</div>
     </section>
+
+    @if ($notice->status == 1)
+    <section>
+        <div class="container-fluid">
+            <div class="row scroll">
+                <div class="col-md-2 col-sm-3 scroll_01 " style="background-color:aquamarine" >
+                    @if (session()->get('lang')== 'english')
+                        Notice :
+                    @else
+                        お知らせ :
+                    @endif
+				</div>
+				<div class="col-md-10 col-sm-9 scroll_02">
+                    <marquee>
+                        @if (session()->get('lang')== 'english')
+                        {{ $notice->notice_en }}
+                        @else
+                        {{ $notice->notice_jp }}
+                        @endif
+                    </marquee>
+				</div>
+			</div>
+    	</div>
+    </section>
+
+    @endif

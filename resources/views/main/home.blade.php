@@ -132,19 +132,25 @@
 							<div class="sidebar-add"><img src="{{ asset('frontend/assets/img/add_01.jpg') }}" alt="" /></div>
 						</div>
 					</div><!-- /.add-close -->
+                    @php
+                        $livetv = DB::table('livetvs')->first();
+                    @endphp
 
-					<!-- youtube-live-start -->
-					<div class="cetagory-title-03">Live TV</div>
+<!-- youtube-live-start -->
+@if ($livetv->status == 1 )
+                    <div class="cetagory-title-03">Live TV</div>
 					<div class="photo">
                         <div class="embed-responsive embed-responsive-16by9 embed-responsive-item" style="margin-bottom:5px;">
+                            {!! $live->embed_code !!}
                             <iframe width="729" height="410" src="https://www.youtube.com/embed/S81Kte7X9uk" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
-                       </div>
+                        </div>
 					</div><!-- /.youtube-live-close -->
+                    @endif
 
 					<!-- facebook-page-start -->
 					<div class="cetagory-title-03">Facebook </div>
 					<div class="fb-root">
-						facebook page here
+                        facebook page here
 					</div><!-- /.facebook-page-close -->
 
 					<!-- add-start -->
@@ -468,49 +474,29 @@
 							</div>
 						</div>
 					</div>
-					<!-- Namaj Times -->
-					<div class="cetagory-title-03">Prayer Time </div>
-					Prayer Times count option here
-					<!-- Namaj Times -->
-					<div class="cetagory-title-03">Old News  </div>
-					<form action="" method="post">
-						<div class="old-news-date">
-						   <input type="text" name="from" placeholder="From Date" required="">
-						   <input type="text" name="" placeholder="To Date">
-						</div>
-						<div class="old-date-button">
-							<input type="submit" value="search ">
-						</div>
-				   </form>
+
 				   <!-- news -->
 				   <br><br><br><br><br>
-				   <div class="cetagory-title-04"> Important Website</div>
+				   <div class="cetagory-title-04">
+                       @if (session()->get('lang')== 'english')
+                           Important Website
+                       @else
+                            重要なウェブサイト
+                       @endif
+                   </div>
 				   <div class="">
+                       @php
+                           $websitelink = DB::table('websites')->get();
+                       @endphp
+
+                       @foreach ($websitelink as $row)
+
 				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved  </a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved</a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved  </a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved </a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved  </a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved  </a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved  </a> </h4>
-				   	</div>
-				   	<div class="news-title-02">
-				   		<h4 class="heading-03"><a href="#"><i class="fa fa-check" aria-hidden="true"></i> Both education and life must be saved </a> </h4>
-				   	</div>
-				   </div>
+                           <h4 class="heading-03"><a href="{{ $row->website_link }}"><i class="fa fa-check" aria-hidden="true"></i>{{ $row->website_name }}</a> </h4>
+                        </div>
+
+                    </div>
+                    @endforeach
 
 				</div>
 			</div>
